@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "genre_20182370004")
 public class Genre {
 
   @Id

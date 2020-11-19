@@ -7,10 +7,10 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/pob_steam" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/projeto2" />
             <property name="javax.persistence.jdbc.user" value="postgres" />
             <property name="javax.persistence.jdbc.password" value="586467" />
-<!--            <property name="javax.persistence.schema-generation.database.action" value="create"/>-->
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
 <!--            <property name="javax.persistence.schema-generation.scripts.action" value="create"/>-->
 <!--            <property name="javax.persistence.schema-generation.scripts.create-target" value="ddl.txt"/>-->
 <!--            <property name="eclipselink.logging.level" value="fine"/>-->

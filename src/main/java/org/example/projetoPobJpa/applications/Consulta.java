@@ -2,6 +2,7 @@ package org.example.projetoPobJpa.applications;
 
 import org.example.projetoPobJpa.facade.Facade;
 import org.example.projetoPobJpa.model.Game;
+import org.example.projetoPobJpa.model.Genre;
 
 import java.util.List;
 
@@ -11,7 +12,10 @@ public class Consulta {
     Facade.start();
 
     try {
-      consultarJogosComPrecoMaiorQue50();
+//      consultarJogosComPrecoMaiorQue50();
+
+      // Consulta que envolve todas as classes
+      consultarGenerosDosJogosDoUsuario();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -28,6 +32,12 @@ public class Consulta {
       System.out.println(string);
     }
 
+  }
+
+  //Gêneros dos jogos de um usuário
+  public void consultarGenerosDosJogosDoUsuario() throws Exception {
+    List<Genre> genres = Facade.listUserGamesGenres("Adilson");
+    System.out.println(genres);
   }
 
   public static void main(String[] args) {

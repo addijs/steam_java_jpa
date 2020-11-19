@@ -64,7 +64,10 @@ public class App {
           System.out.print("Digite sua senha: ");
           String password = keyboard.nextLine();
 
-          Facade.registerUser(name, email, password);
+          System.out.print("Digite a sua data de nascimento (no formato YYYY-MM-DD): ");
+          String birthdate = keyboard.nextLine();
+
+          Facade.registerUser(name, email, password, birthdate);
         }	catch(Exception e) {
           System.out.println("\n" + e.getMessage());
         }
@@ -81,7 +84,7 @@ public class App {
     }
   }
 
-  private void logged() {
+  private void logged() throws Exception {
     User loggedUser = Facade.getLoggedUser();
 
     if(loggedUser == null) {
@@ -91,7 +94,7 @@ public class App {
     String userName = loggedUser.getName();
     String userGames = loggedUser.getGames().toString();
     String userWallet = Facade.formatMoney(loggedUser.getWallet());
-    String gamesGenres = Facade.listUserGamesGenres(loggedUser).toString();
+    String gamesGenres = Facade.listUserGamesGenres(loggedUser.getName()).toString();
 
     String welcome = String.format("\n======= Olá %s! ======="
                     + "\n Sua carteira: R$%s"

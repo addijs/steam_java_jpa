@@ -10,6 +10,7 @@ import org.example.projetoPobJpa.model.User;
 
 import javax.persistence.NoResultException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,18 +28,8 @@ public class Facade {
     DAO.close();
   }
 
-  public static List<Genre> listUserGamesGenres(User user) {
-    List<Game> userGames = user.getGames();
-    List<Genre> genresList = new ArrayList<>();
-
-    for(Game game: userGames) {
-      for(Genre genre: game.getGenres()) {
-        if(!genresList.contains(genre)) {
-          genresList.add(genre);
-        }
-      }
-    }
-
+  public static List<Genre> listUserGamesGenres(String username) throws Exception {
+    List<Genre> genresList = daoGenre.userGamesGenres(username);
     return genresList;
   }
 
@@ -87,7 +78,7 @@ public class Facade {
     }
   }
 
-  public static void registerUser(String name, String email, String password) throws Exception {
+  public static void registerUser(String name, String email, String password, String birthdate) throws Exception {
     DAO.Transaction.begin();
 
     try {
@@ -98,7 +89,18 @@ public class Facade {
         throw new Exception("This user already exists.");
       }
 
-      User newUser = new User(name, email, password);
+      String[] parts = birthdate.split("-");
+
+      User newUser = new User(
+              name,
+              email,
+              password,
+              LocalDate.of(
+                      Integer.parseInt(parts[0]),
+                      Integer.parseInt(parts[1]),
+                      Integer.parseInt(parts[2])
+              )
+      );
 
       daoUser.create(newUser);
       DAO.Transaction.commit();

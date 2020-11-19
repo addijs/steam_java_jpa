@@ -18,11 +18,11 @@ public class Register {
     Facade.finish();
   }
 
-  public Register(String name, String email, String password) {
+  public Register(String name, String email, String password, String birthdate) {
     Facade.start();
 
     try {
-      Facade.registerUser(name, email, password);
+      Facade.registerUser(name, email, password, birthdate);
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -88,7 +88,7 @@ public class Register {
     new Register(new Game("Bioshock Infinite", 89.99), arrayG);
 
     // Adding users
-    new Register("Adilson", "adelso@gmail.com", "123456");
-    new Register("Paulo", "paulo@hotmail.com", "abcd");
+    new Register("Adilson", "adelso@gmail.com", "123456", "1999-03-05");
+    new Register("Paulo", "paulo@hotmail.com", "abcd", "1994-09-11");
   }
 }

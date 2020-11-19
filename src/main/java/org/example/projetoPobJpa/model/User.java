@@ -1,18 +1,24 @@
 package org.example.projetoPobJpa.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user_")
+@Table(name = "user_20182370004")
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Transient
+  private int age;
+
   private String name;
+  private LocalDate birthdate;
   private String email;
   private String password;
   private double wallet;
@@ -25,10 +31,11 @@ public class User {
 
   public User() {}
 
-  public User(String name, String email, String pass) {
+  public User(String name, String email, String pass, LocalDate birthdate) {
     this.name = name;
     this.email = email;
     this.password = pass;
+    this.birthdate = birthdate;
     this.wallet = 0;
   }
 
@@ -68,8 +75,29 @@ public class User {
     return games;
   }
 
+  public int getAge() {
+    return age;
+  }
+
+  public LocalDate getBirthdate() {
+    return birthdate;
+  }
+
+  public void setBirthdate(LocalDate birthdate) {
+    this.birthdate = birthdate;
+  }
+
+  @PostLoad
+  @PrePersist
+  @PostUpdate
+  private void calculateAge() {
+    LocalDate today = LocalDate.now();
+    Period period = Period.between(birthdate, today);
+    age = period.getYears();
+  }
+
   @Override
   public String toString() {
-    return getName();
+    return getName() + " age: " + getAge();
   }
 }
