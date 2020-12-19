@@ -56,6 +56,7 @@ public class DAOGenre extends DAO<Genre>{
 
       return genresList;
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       throw new Exception("Internal Server Error");
     }
   }

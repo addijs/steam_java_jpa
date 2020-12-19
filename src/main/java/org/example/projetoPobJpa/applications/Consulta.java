@@ -17,7 +17,7 @@ public class Consulta {
       // Consulta que envolve todas as classes
       consultarGenerosDosJogosDoUsuario();
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      System.out.println("Error: " + e.getMessage());
     }
 
     Facade.finish();

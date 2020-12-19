@@ -1,32 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-
-    <!--  ECLIPSELINK  -->
-    <persistence-unit name="eclipselink-postgres" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="eclipselink-mongodb" 	transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/projeto2" />
-            <property name="javax.persistence.jdbc.user" value="postgres" />
-            <property name="javax.persistence.jdbc.password" value="586467" />
-            <property name="javax.persistence.schema-generation.database.action" value="create"/>
-<!--            <property name="javax.persistence.schema-generation.scripts.action" value="create"/>-->
-<!--            <property name="javax.persistence.schema-generation.scripts.create-target" value="ddl.txt"/>-->
-<!--            <property name="eclipselink.logging.level" value="fine"/>-->
-<!--            <property name="eclipselink.logging.file" value="log.txt"/>-->
+            <property name="eclipselink.target-database"
+                      value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform" />
+            <property name="eclipselink.nosql.connection-spec"
+                      value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec" />
+            <property name="eclipselink.nosql.property.mongo.port"		value="27017" />
+            <property name="eclipselink.nosql.property.mongo.host"		value="localhost" />
+            <property name="eclipselink.nosql.property.mongo.db"		value="projeto-pob-mongo" />
+            <property name="eclipselink.logging.level" value="FINE" />
+            <property name="eclipselink.logging.file" value="log.txt" />
         </properties>
     </persistence-unit>
-
-<!--    <persistence-unit name="hibernate-postgres" transaction-type="RESOURCE_LOCAL">-->
-<!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
-<!--        <exclude-unlisted-classes>false</exclude-unlisted-classes>-->
-<!--        <properties>-->
-<!--            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />-->
-<!--            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/pob_steam" />-->
-<!--            <property name="javax.persistence.jdbc.user" value="postgres" />-->
-<!--            <property name="javax.persistence.jdbc.password" value="586467" />-->
-<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />-->
-<!--        </properties>-->
-<!--    </persistence-unit>-->
 </persistence>

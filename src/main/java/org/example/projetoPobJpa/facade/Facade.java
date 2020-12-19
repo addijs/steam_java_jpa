@@ -8,10 +8,9 @@ import org.example.projetoPobJpa.model.Game;
 import org.example.projetoPobJpa.model.Genre;
 import org.example.projetoPobJpa.model.User;
 
-import javax.persistence.NoResultException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Facade {
@@ -29,8 +28,7 @@ public class Facade {
   }
 
   public static List<Genre> listUserGamesGenres(String username) throws Exception {
-    List<Genre> genresList = daoGenre.userGamesGenres(username);
-    return genresList;
+    return daoGenre.userGamesGenres(username);
   }
 
   public static User findUser(String email) throws Exception {
@@ -70,7 +68,8 @@ public class Facade {
 
       daoGame.create(obj);
       DAO.Transaction.commit();
-      System.out.println(String.format("The game was registered successfully. %s", gameTitle));
+      System.out.printf("The game was registered successfully. %s%n", gameTitle);
+//      System.out.println(String.format("The game was registered successfully. %s", gameTitle));
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -95,10 +94,12 @@ public class Facade {
               name,
               email,
               password,
-              LocalDate.of(
+              LocalDateTime.of(
                       Integer.parseInt(parts[0]),
                       Integer.parseInt(parts[1]),
-                      Integer.parseInt(parts[2])
+                      Integer.parseInt(parts[2]),
+                      LocalDateTime.now().getHour(),
+                      LocalDateTime.now().getMinute()
               )
       );
 
@@ -139,7 +140,7 @@ public class Facade {
     Game game = daoGame.read(name);
 
     if(game == null) {
-      throw new Exception(String.format("This game does not exist"));
+      throw new Exception("This game does not exist");
     }
 
     game.setTitle("Teste de update");
@@ -153,7 +154,7 @@ public class Facade {
     Game game = daoGame.read(name);
 
     if(game == null) {
-      throw new Exception(String.format("This game does not exist"));
+      throw new Exception("This game does not exist");
     }
 
     daoGame.delete(game);

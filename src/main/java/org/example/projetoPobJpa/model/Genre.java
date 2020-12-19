@@ -1,20 +1,26 @@
 package org.example.projetoPobJpa.model;
 
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "genre_20182370004")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NoSql(dataFormat= DataFormatType.MAPPED)
 public class Genre {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  @GeneratedValue
+  @Column(name = "_id")
+  private String id;
 
   String name;
 
-  @ManyToMany(mappedBy = "genres")
+  @ManyToMany()
   private final List<Game> games = new ArrayList<>();
 
   public Genre() {}
@@ -23,11 +29,11 @@ public class Genre {
     this.name = name;
   }
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(String id) {
     this.id = id;
   }
 
